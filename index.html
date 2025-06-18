@@ -11,7 +11,7 @@
     <script>
         let computerScore = 0;
         let humanScore = 0;
-        
+
        // Function to generate computer choice
        function getComputerChoice() {
             // Generate a random number between 1 and 9 inclusive
@@ -36,8 +36,9 @@
        function getHumanChoice() {
             // Prompt user to enter a choice of either rock or paper or scissors
             const humanChoice = prompt('Enter a choice: (rock/paper/scissors)');
+            const cleanHumanChoice = humanChoice.trim().toLowerCase();
 
-            return humanChoice;
+            return cleanHumanChoice;
        }
     </script>
 </body>
