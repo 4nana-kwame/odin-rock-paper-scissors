@@ -9,7 +9,25 @@
     
 
     <script>
-        
+       // Function to generate computer choice
+       function getComputerChoice() {
+            // Generate a random number between 1 and 9 inclusive
+            const randomNumber = Math.floor(Math.random() * 9) + 1;
+
+            // Variable to hold computer choice
+            let computerChoice;
+
+            // Assign "rock", "paper", or "scissors" to computerChoice based on the range of randomNumber
+            if (randomNumber >= 1 && randomNumber < 4) {
+                computerChoice = 'rock';
+            } else if (randomNumber >= 4 && randomNumber < 7) {
+                computerChoice = 'paper';
+            } else {
+                computerChoice = 'scissors';
+            }
+
+            return computerChoice;
+       }
     </script>
 </body>
 </html>
