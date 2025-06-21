@@ -5,20 +5,17 @@ const scissors = document.querySelector('#scissors');
 const output = document.querySelector('#output');
 
 let computerScore = 0;
-    let humanScore = 0;
+let humanScore = 0;
 
 // Add event delegation to btnContainer to target buttons
 btnContainer.addEventListener('click', getHumanChoice);
 
 // Function to generate computer choice
 function getComputerChoice() {
-    // Generate a random number between 1 and 9 inclusive
     const randomNumber = Math.floor(Math.random() * 9) + 1;
 
-    // Variable to hold computer choice
     let computerChoice;
 
-    // Assign "rock", "paper", or "scissors" to computerChoice based on the range of randomNumber
     if (randomNumber >= 1 && randomNumber < 4) {
         computerChoice = 'rock';
     } else if (randomNumber >= 4 && randomNumber < 7) {
@@ -30,31 +27,26 @@ function getComputerChoice() {
     return computerChoice;
 }
 
-// Function to get human choice
+// Function to get human choice and compare to computer choice and display result in the DOM
 function getHumanChoice(event) {
-    let humanSelection = '';
+    if (!['rock', 'paper', 'scissors'].includes(target.id)) return;
+    let target = event.target;
 
-    if (event.target.id === 'rock') {
-        humanSelection = 'rock';
-        console.log(humanSelection);
-    } else if (event.target.id === 'paper') {
-        humanSelection = 'paper';
-        console.log(humanSelection);
+    let humanChoice = '';
+
+    if (target.id === 'rock') {
+        humanChoice = 'rock';
+    } else if (target.id === 'paper') {
+        humanChoice = 'paper';
     } else {
-        humanSelection = 'scissors';
-        console.log(humanSelection);
+        humanChoice = 'scissors';
     }
 
+    const computerChoice = getComputerChoice();
 
-    return humanSelection;
-}
-       
-// Function to play one round using human and computer choices
-function playRound(humanChoice, computerChoice) {
-    // Will store outcome message of this round
     let result;
 
-    // Compare humanChoice to computerChoice and display the result to the console
+    // Compare humanChoice to computerChoice
     if (
         (humanChoice === 'rock' && computerChoice === 'paper') ||
         (humanChoice === 'paper' && computerChoice === 'scissors') ||
@@ -73,7 +65,16 @@ function playRound(humanChoice, computerChoice) {
         result = `It's a tie.`;
     }
 
-    return result;
+    // Display result in the DOM
+    const divResult = document.createElement('div');
+    divResult.textContent = result;
+
+    output.appendChild(divResult);
+
+    const divScore = document.createElement('div');
+    divScore.textContent = `Your score: ${humanScore}. Computer score: ${computerScore}`;
+
+    output.appendChild(divScore);
 }
 
 // Function to play the game 5 times
@@ -82,12 +83,15 @@ function playGame() {
     humanScore = 0;
     computerScore = 0;
 
+    // DOM element to display the winner of the game
+    const finalResult = document.createElement('div');
+
     // An if statement to compare humanScore to computerScore and loggin the result to the console
     if (humanScore > computerScore) {
-        console.log('You win!');
+        finalResult.textContent = 'Congratulations! You win.';
     } else if (computerScore > humanScore) {
-        console.log('You lose!');
+        finalResult.textContent = 'You lose.';
     } else {
-        console.log(`It's a tie`);
+        finalResult.textContent = `It's a tie!`;
     }
 }
