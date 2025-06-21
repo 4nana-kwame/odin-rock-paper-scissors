@@ -1,5 +1,13 @@
+const btnContainer = document.querySelector('#btn-container');
+const rock = document.querySelector('#rock');
+const paper = document.querySelector('#paper');
+const scissors = document.querySelector('#scissors');
+
 let computerScore = 0;
     let humanScore = 0;
+
+// Add event delegation to btnContainer to target buttons
+btnContainer.addEventListener('click', getHumanChoice);
 
 // Function to generate computer choice
 function getComputerChoice() {
@@ -22,12 +30,22 @@ function getComputerChoice() {
 }
 
 // Function to get human choice
-function getHumanChoice() {
-    // Prompt user to enter a choice of either rock or paper or scissors
-    const humanChoice = prompt('Enter a choice: (rock/paper/scissors)');
-    const cleanHumanChoice = humanChoice.trim().toLowerCase();
+function getHumanChoice(event) {
+    let humanSelection = '';
 
-    return cleanHumanChoice;
+    if (event.target.id === 'rock') {
+        humanSelection = 'rock';
+        console.log(humanSelection);
+    } else if (event.target.id === 'paper') {
+        humanSelection = 'paper';
+        console.log(humanSelection);
+    } else {
+        humanSelection = 'scissors';
+        console.log(humanSelection);
+    }
+
+
+    return humanSelection;
 }
        
 // Function to play one round using human and computer choices
