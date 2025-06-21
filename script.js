@@ -2,6 +2,7 @@ const btnContainer = document.querySelector('#btn-container');
 const rock = document.querySelector('#rock');
 const paper = document.querySelector('#paper');
 const scissors = document.querySelector('#scissors');
+const output = document.querySelector('#output');
 
 let computerScore = 0;
     let humanScore = 0;
