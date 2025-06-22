@@ -11,13 +11,21 @@
 </head>
 <body>
     
-    <div id="btn-container">
-        <button id="rock">&#x270A;</button>
-        <button id="paper">&#X1F590;</button>
-        <button id="scissors">&#x270C;</button>
+    <div id="game-container">
+        <h1 class="heading"><span class="game-emoji">&#x1F3AE;</span> Rock Paper Scissors</h1>
+        <div id="btn-container">
+            <button id="rock">&#x270A;</button>
+            <button id="paper">&#X1F590;</button>
+            <button id="scissors">&#x270C;</button>
+            <div class="move">Choose your move</div>
+        </div>
+        <div id="output">
+            <div class="computer-score"></div>
+            <div class="your-score"></div>
+            <div class="result"></div>
+        </div>
+        <button id="reset">Reset Game</button>
     </div>
-
-    <div id="output"></div>
 
     <script src="script.js"></script>
 </body>
