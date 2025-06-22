@@ -22,5 +22,5 @@ This is a simple rock paper scissors game built with JavaScript. It was created 
 ## Technologies Used
 
 * HTML
+* CSS
 * JavaScript
-* Browser console (for input/output)
