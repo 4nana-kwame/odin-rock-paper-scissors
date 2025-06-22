@@ -1,3 +1,4 @@
+const gameContainer = document.querySelector('#game-container');
 const btnContainer = document.querySelector('#btn-container');
 const rock = document.querySelector('#rock');
 const paper = document.querySelector('#paper');
@@ -5,7 +6,9 @@ const scissors = document.querySelector('#scissors');
 const output = document.querySelector('#output');
 const displayCompScore = document.querySelector('.computer-score');
 const displayHumanScore = document.querySelector('.your-score');
-const displayResult = document.querySelector('result');
+const displayResult = document.querySelector('.result');
+const resetBtn = document.querySelector('#reset');
+const btnContainerChildren = document.querySelectorAll('#btn-container > button');
 
 // Track scores
 let computerScore = 0;
@@ -16,6 +19,7 @@ let gameRound = 0;
 
 // Add event delegation to btnContainer to target buttons
 btnContainer.addEventListener('click', getHumanChoice);
+resetBtn.addEventListener('click', resetGame)
 
 // Function to generate computer choice
 function getComputerChoice() {
@@ -36,8 +40,9 @@ function getComputerChoice() {
 
 // Function to get human choice and compare to computer choice and display result in the DOM
 function getHumanChoice(event) {
-    // if (!['rock', 'paper', 'scissors'].includes(target.id)) return;
     let target = event.target;
+
+    if (!['rock', 'paper', 'scissors'].includes(target.id)) return;
 
     let humanChoice = '';
 
@@ -51,40 +56,31 @@ function getHumanChoice(event) {
 
     const computerChoice = getComputerChoice();
 
-    let result;
-
     // Compare humanChoice to computerChoice
     if (
         (humanChoice === 'rock' && computerChoice === 'paper') ||
         (humanChoice === 'paper' && computerChoice === 'scissors') ||
         (humanChoice === 'scissors' && computerChoice === 'rock')
         ) {
-        result = `You lose, ${computerChoice} beats ${humanChoice}.`;
-        computerScore++;
-        gameRound++;
+            displayResult.textContent = `Lose, ${computerChoice} beats ${humanChoice}`;
+            computerScore++;
+            gameRound++;
     } else if (
         (humanChoice === 'rock' && computerChoice === 'scissors') ||
         (humanChoice === 'scissors' && computerChoice === 'paper') ||
         (humanChoice === 'paper' && computerChoice === 'rock')
         ) {
-            result = `You win, ${humanChoice} beats ${computerChoice}.`;
+            displayResult.textContent = `Win, ${humanChoice} beats ${computerChoice}`;
             humanScore++;
             gameRound++;
     } else {
-        result = `It's a tie.`;
+        displayResult.textContent = `Tie!`;
         gameRound++;
     }
 
     // Display result in the DOM
-    const divResult = document.createElement('div');
-    divResult.textContent = result;
-
-    output.appendChild(divResult);
-
-    const divScore = document.createElement('div');
-    divScore.textContent = `Your score: ${humanScore}. Computer score: ${computerScore}.`;
-
-    output.appendChild(divScore);
+    displayCompScore.textContent = `Computer score: ${computerScore}`;
+    displayHumanScore.textContent = `Your score: ${humanScore}`
 
     if (gameRound === 5) {
         endGame();
@@ -93,19 +89,14 @@ function getHumanChoice(event) {
 
 // Function to end the game after 5 plays
 function endGame() {
-    // DOM element to display the winner of the game
-    const finalResult = document.createElement('div');
-
-    // An if statement to compare humanScore to computerScore and loggin the result to the console
+    // An if statement to compare humanScore to computerScore to display winner
     if (humanScore > computerScore) {
-        finalResult.textContent = 'Congratulations! You won.';
+        displayResult.textContent = `You won \u{1F389}`;
     } else if (computerScore > humanScore) {
-        finalResult.textContent = 'You lost.';
+        displayResult.textContent = `Computer won. \u{1F916}`;
     } else {
-        finalResult.textContent = `It's a tie!`;
+        displayResult.textContent = `It's a tie! \u{1F91D}`;
     }
-
-    output.appendChild(finalResult);
 
     // Resetting the scores and round to avoid accumulation after playing 5 times
     humanScore = 0;
@@ -113,7 +104,30 @@ function endGame() {
     gameRound = 0;
 
     // Disable buttons
-    rock.disabled = true;
-    paper.disabled = true;
-    scissors.disabled = true;
+    btnContainerChildren.forEach(child => {
+        child.disabled = true;
+        child.style.cursor = 'not-allowed';
+        child.style.opacity = '0.5';
+    });
+
+    resetBtn.style.display = 'block';
+}
+
+// Function to reset the game
+function resetGame() {
+    displayCompScore.textContent = '';
+    displayHumanScore.textContent = '';
+    displayResult.textContent = '';
+    
+    btnContainerChildren.forEach(child => {
+        child.disabled = false;
+        child.style.cursor = 'pointer';
+        child.style.opacity = '1';
+    });
+
+    humanScore = 0;
+    computerScore = 0;
+    gameRound = 0;
+
+    resetBtn.style.display = 'none';
 }

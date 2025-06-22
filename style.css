@@ -5,10 +5,10 @@
 }
 
 body {
-    font-family: Roboto, 'san-serif';
+    font-family: Roboto, 'sans-serif';
     height: 100vh;
     background: linear-gradient(
-        135deg, #6767e4, #cf06cf
+        135deg, turquoise, purple
     );
     background-repeat: no-repeat;
     background-attachment: fixed;
@@ -38,7 +38,7 @@ body {
     font-size: 48px;
 }
 
-button {
+#btn-container button {
     padding: 20px;
     font-size: 48px;
     margin: 10px;
@@ -48,15 +48,15 @@ button {
     color: #fff;
     border: none;
     cursor: pointer;
-    transition: transform 0.5s ease;
+    transition: all 0.3s ease;
 }
 
-button:hover {
+#btn-container button:hover {
     transform: scale(1.1);
 }
 
 .game-emoji {
-    color: #c8a2c8;
+    color: #7c1f7c;
 }
 
 .move {
@@ -73,7 +73,6 @@ button:hover {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    display: none;
 }
 
 #output div {
@@ -85,5 +84,16 @@ button:hover {
     font-size: 20px;
     width: 200px;
     text-align: center;
+    border-radius: 5px;
+    padding: 15px;
+    border: none;
+    background: linear-gradient(90deg, #b878ec, #800080);
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.5s ease;
     display: none;
+}
+
+#reset:hover {
+    transform: scale(1.1);
 }
