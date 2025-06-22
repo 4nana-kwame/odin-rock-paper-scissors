@@ -3,6 +3,9 @@ const rock = document.querySelector('#rock');
 const paper = document.querySelector('#paper');
 const scissors = document.querySelector('#scissors');
 const output = document.querySelector('#output');
+const displayCompScore = document.querySelector('.computer-score');
+const displayHumanScore = document.querySelector('.your-score');
+const displayResult = document.querySelector('result');
 
 // Track scores
 let computerScore = 0;
